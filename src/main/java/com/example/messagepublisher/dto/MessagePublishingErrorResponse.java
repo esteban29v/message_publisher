@@ -1,14 +1,7 @@
 package com.example.messagepublisher.dto;
 
-import lombok.Data;
-
-@Data
-public class MessagePublishingErrorResponse {
-	private boolean status;
-    private String message;
-
+public class MessagePublishingErrorResponse extends BaseApiResponse {
     public MessagePublishingErrorResponse(String message) {
-        this.status = false;
-        this.message = message;
+        super(false, message);
     }
 }

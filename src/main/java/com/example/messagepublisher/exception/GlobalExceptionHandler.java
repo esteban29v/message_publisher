@@ -27,7 +27,7 @@ public class GlobalExceptionHandler {
     @ResponseStatus(HttpStatus.FORBIDDEN)
     public ResponseEntity<UnauthorizedLineResponse> handleUnauthorizedOriginException(UnauthorizedOriginException ex) {
         return ResponseEntity.status(HttpStatus.FORBIDDEN)
-        .body(new UnauthorizedLineResponse(false, ex.getMessage()));
+        .body(new UnauthorizedLineResponse(ex.getMessage()));
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)

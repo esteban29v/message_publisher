@@ -14,7 +14,7 @@ import com.example.messagepublisher.service.MessagePublisherService;
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping("/")
+@RequestMapping("/api/messages")
 public class MessageController {
 
     private final AuthorizationService authorizationService;
@@ -26,7 +26,7 @@ public class MessageController {
         this.messagePublisherService = messagePublisherService;
     }
 
-    @PostMapping
+    @PostMapping("/publish")
     public ResponseEntity<MessageResponse> publishMessage(@RequestBody @Valid MessageRequest request) {
 
         authorizationService.isOriginAuthorized(request.getOrigin());

@@ -10,10 +10,11 @@ import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import com.example.messagepublisher.config.RabbitMQConfig;
 import com.example.messagepublisher.dto.MessageRequest;
 import com.example.messagepublisher.exception.MessagePublishingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+
+import org.springframework.amqp.support.AmqpHeaders;
 
 @Service
 public class MessagePublisherService {
@@ -43,7 +44,7 @@ public class MessagePublisherService {
                     .withBody(messageBody)
                     .setContentType(MessageProperties.CONTENT_TYPE_JSON)
                     .setDeliveryMode(MessageDeliveryMode.PERSISTENT)
-                    .setHeader("timestamp", Instant.now().toEpochMilli())
+                    .setHeader(AmqpHeaders.TIMESTAMP, Instant.now().toEpochMilli())
                     .build();
 
             rabbitTemplate.send(
